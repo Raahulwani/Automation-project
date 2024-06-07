@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Cloning') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Urpritesh22/automation.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Raahulwani/Automation-project.git']])
             }
         }
     
