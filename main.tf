@@ -29,14 +29,7 @@ resource "aws_security_group" "jenkins-sg-2022" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
- ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
- # outbound from jenkis server
+# outbound from jenkis server
   egress {
     from_port   = 0
     to_port     = 65535
