@@ -26,14 +26,14 @@ pipeline {
                 sh ('terraform ${action} --auto-approve') 
 
         triggers{
-            cron('H 2 * * *)
+            cron('H 2 * * *')
            }
-                 stage('Build){
+                 stage('Build'){
                        stage{
                            echo 'Building'
         }
     }
-        stage('Test){
+        stage('Test'){
                        stage{
                            echo 'Testing'
         }
