@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     triggers {
-        cron('3 15 * * *')
+        cron('36 9 * * *') // Runs daily at 3:06 PM IST (UTC+5:30)
     }
 
     environment {
-        action = 'apply' // or 'destroy' – set as appropriate
+        action = 'apply'
     }
 
     stages {
