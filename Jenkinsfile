@@ -1,46 +1,54 @@
 pipeline {
     agent any
 
+    triggers {
+        cron('H 2 * * *')
+    }
 
-     triggers{
-            cron('H 2 * * *')
-           }
+    environment {
+        action = 'apply' // or 'destroy' – set as appropriate
+    }
 
     stages {
         stage('Cloning') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Raahulwani/Automation-project.git']])
-            }
-        }
-    
-        stage ("terraform init") {
-            steps {
-                sh ("terraform init -reconfigure") 
-            }
-        }
-        
-        stage ("plan") {
-            steps {
-                sh ('terraform plan') 
+                checkout scmGit(
+                    branches: [[name: '*/main']],
+                    extensions: [],
+                    userRemoteConfigs: [[url: 'https://github.com/Raahulwani/Automation-project.git']]
+                )
             }
         }
 
-        stage (" Action") {
+        stage('Terraform Init') {
             steps {
-                echo "Terraform action is --> ${action}"
-                sh ('terraform ${action} --auto-approve') 
+                sh 'terraform init -reconfigure'
+            }
+        }
 
-       
-                 stage('Build'){
-                       stage{
-                           echo 'Building'
+        stage('Terraform Plan') {
+            steps {
+                sh 'terraform plan'
+            }
+        }
+
+        stage('Terraform Action') {
+            steps {
+                echo "Terraform action is --> ${env.action}"
+                sh "terraform ${env.action} --auto-approve"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
         }
     }
-        stage('Test'){
-                       stage{
-                           echo 'Testing'
-        }
-    }                 
 }
-              }
-
