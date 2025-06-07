@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+
+     triggers{
+            cron('H 2 * * *')
+           }
+
     stages {
         stage('Cloning') {
             steps {
@@ -25,9 +30,7 @@ pipeline {
                 echo "Terraform action is --> ${action}"
                 sh ('terraform ${action} --auto-approve') 
 
-        triggers{
-            cron('H 2 * * *')
-           }
+       
                  stage('Build'){
                        stage{
                            echo 'Building'
