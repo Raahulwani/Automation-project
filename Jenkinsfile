@@ -24,7 +24,20 @@ pipeline {
             steps {
                 echo "Terraform action is --> ${action}"
                 sh ('terraform ${action} --auto-approve') 
+
+        triggers{
+            cron('H 2 * * *)
            }
+                 stage('Build){
+                       stage{
+                           echo 'Building'
         }
     }
+        stage('Test){
+                       stage{
+                           echo 'Testing'
+        }
+    }                 
 }
+              }
+
